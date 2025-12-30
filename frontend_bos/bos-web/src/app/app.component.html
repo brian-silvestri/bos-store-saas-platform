@@ -1,0 +1,17 @@
+<ng-container *ngIf="!isAdminRoute()">
+  <app-header *ngIf="!isLandingRoute() && !isAuthRoute()" [showCart]="!isTrackingRoute()"></app-header>
+  <app-navbar *ngIf="isStoreRoute() && !isLandingRoute() && !isAuthRoute()"></app-navbar>
+
+  <main [class.container]="!isLandingRoute() && !isAuthRoute()" [class.py-6]="!isLandingRoute() && !isAuthRoute()">
+    <router-outlet></router-outlet>
+  </main>
+
+  <app-footer *ngIf="!isLandingRoute() && !isAuthRoute()"></app-footer>
+  <app-whatsapp-float *ngIf="!isLandingRoute() && !isAuthRoute()"></app-whatsapp-float>
+</ng-container>
+
+<ng-container *ngIf="isAdminRoute()">
+  <router-outlet></router-outlet>
+</ng-container>
+
+<app-confirm-dialog></app-confirm-dialog>

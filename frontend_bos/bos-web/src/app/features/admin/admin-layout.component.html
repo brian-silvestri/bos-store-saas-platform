@@ -1,0 +1,16 @@
+<div class="min-h-screen flex bg-[var(--neutral-surface)]">
+  <app-admin-sidebar
+    title="BusinessOS"
+    subtitle="Commerce"
+    [links]="adminLinks"
+    [footerText]="store.config.name"
+  />
+
+  <div class="flex-1 flex flex-col">
+    <app-admin-header />
+    <app-subscription-banner />
+    <section class="flex-1 p-6">
+      <router-outlet></router-outlet>
+    </section>
+  </div>
+</div>

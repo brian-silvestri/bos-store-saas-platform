@@ -1,0 +1,6 @@
+@BosStore.API_HostAddress = http://localhost:5179
+
+GET {{BosStore.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

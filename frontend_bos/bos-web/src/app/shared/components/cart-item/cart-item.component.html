@@ -1,0 +1,43 @@
+<div class="flex gap-3 items-center py-3 border-b border-[var(--border)]">
+  <div class="w-16 h-16 rounded-lg overflow-hidden bg-[var(--surface-soft)] border border-[var(--border-strong)]">
+    <img
+      *ngIf="item.type === 'product' && item.product.imageUrl"
+      [src]="item.product.imageUrl"
+      [alt]="item.product.name"
+      class="w-full h-full object-cover"
+    />
+    <img
+      *ngIf="item.type === 'promo' && item.promo.imageUrl"
+      [src]="item.promo.imageUrl"
+      [alt]="item.promo.name"
+      class="w-full h-full object-cover"
+    />
+  </div>
+
+  <div class="flex-1">
+    <p class="font-semibold text-[var(--text-strong)]">
+      {{ item.type === 'product' ? item.product.name : item.promo.name }}
+    </p>
+    <div class="text-xs text-gray-500">
+      <span>
+        {{ store.currencySymbol }} {{ cart.getUnitPriceForItem(item) }}
+      </span>
+    </div>
+  </div>
+
+  <div class="flex gap-2 items-center">
+    <button
+      class="w-7 h-7 rounded border border-[var(--border-strong)] text-[var(--text)] bg-[var(--surface)] shadow-sm hover:bg-[var(--surface-muted)]"
+      (click)="decrease()"
+    >
+      -
+    </button>
+    <span class="min-w-[1.5rem] text-center font-semibold">{{ item.quantity }}</span>
+    <button
+      class="w-7 h-7 rounded border border-[var(--border-strong)] text-[var(--text)] bg-[var(--surface)] shadow-sm hover:bg-[var(--surface-muted)]"
+      (click)="cart.updateQty(item.type, item.type === 'product' ? item.product.id : item.promo.id, 1)"
+    >
+      +
+    </button>
+  </div>
+</div>

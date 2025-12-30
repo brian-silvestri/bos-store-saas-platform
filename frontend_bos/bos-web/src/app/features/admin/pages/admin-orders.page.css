@@ -1,0 +1,248 @@
+.board-col {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.board-col:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+
+.order-card {
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.order-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+}
+
+.status-pending {
+  border-top: 3px solid #f59e0b;
+  background: linear-gradient(180deg, rgba(245, 158, 11, 0.08), #fff);
+}
+.status-confirmed {
+  border-top: 3px solid #2563eb;
+  background: linear-gradient(180deg, rgba(37, 99, 235, 0.08), #fff);
+}
+.status-preparing {
+  border-top: 3px solid #a855f7;
+  background: linear-gradient(180deg, rgba(168, 85, 247, 0.08), #fff);
+}
+.status-ready {
+  border-top: 3px solid #22c55e;
+  background: linear-gradient(180deg, rgba(34, 197, 94, 0.08), #fff);
+}
+.status-delivered {
+  border-top: 3px solid #16a34a;
+  background: linear-gradient(180deg, rgba(22, 163, 74, 0.08), #fff);
+}
+.status-canceled {
+  border-top: 3px solid #ef4444;
+  background: linear-gradient(180deg, rgba(239, 68, 68, 0.08), #fff);
+}
+
+.drop-active {
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.order-list-header {
+  background: var(--neutral-surface);
+  border-bottom: 2px solid var(--neutral-border);
+}
+
+.order-list-row {
+  transition: background-color 0.15s ease;
+}
+
+.order-list-row:hover {
+  background: var(--neutral-surface);
+}
+
+/* Action buttons styling */
+.action-btn {
+  padding: 6px 14px;
+  font-size: 11px;
+  font-weight: 500;
+  border-radius: 6px;
+  border: 1.5px solid;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.action-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+}
+
+.action-btn:active {
+  transform: translateY(0);
+}
+
+/* Next action - Primary/Green */
+.action-btn-next {
+  border-color: #10b981;
+  background: #10b981;
+  color: white;
+}
+
+.action-btn-next:hover {
+  background: #059669;
+  border-color: #059669;
+}
+
+/* Previous action - Secondary/Gray */
+.action-btn-prev {
+  border-color: var(--neutral-border);
+  background: var(--surface);
+  color: var(--neutral-text);
+}
+
+.action-btn-prev:hover {
+  background: var(--neutral-surface);
+  border-color: #6b7280;
+}
+
+/* Cancel action - Danger/Red */
+.action-btn-cancel {
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+}
+
+.action-btn-cancel:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: #dc2626;
+}
+
+/* Small action buttons for table view */
+.action-btn-small {
+  padding: 4px 10px;
+  font-size: 10px;
+  font-weight: 500;
+  border-radius: 5px;
+  border: 1.5px solid;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.action-btn-small:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.action-btn-small.action-btn-next {
+  border-color: #10b981;
+  background: #10b981;
+  color: white;
+}
+
+.action-btn-small.action-btn-next:hover {
+  background: #059669;
+}
+
+.action-btn-small.action-btn-prev {
+  border-color: var(--neutral-border);
+  background: var(--surface);
+  color: var(--neutral-text);
+}
+
+.action-btn-small.action-btn-prev:hover {
+  background: var(--neutral-surface);
+  border-color: #6b7280;
+}
+
+.action-btn-small.action-btn-cancel {
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+}
+
+.action-btn-small.action-btn-cancel:hover {
+  background: rgba(239, 68, 68, 0.2);
+}
+
+/* Status badges */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 12px;
+  text-transform: capitalize;
+}
+
+.status-badge-pending {
+  background: rgba(245, 158, 11, 0.15);
+  color: #d97706;
+}
+
+.status-badge-confirmed {
+  background: rgba(37, 99, 235, 0.15);
+  color: #1d4ed8;
+}
+
+.status-badge-preparing {
+  background: rgba(168, 85, 247, 0.15);
+  color: #9333ea;
+}
+
+.status-badge-ready {
+  background: rgba(34, 197, 94, 0.15);
+  color: #16a34a;
+}
+
+.status-badge-delivered {
+  background: rgba(22, 163, 74, 0.15);
+  color: #15803d;
+}
+
+.status-badge-canceled {
+  background: rgba(239, 68, 68, 0.15);
+  color: #dc2626;
+}
+
+/* Fullscreen mode styles */
+.fullscreen-mode {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: white;
+  z-index: 9999;
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+/* Enlarge text and cards in fullscreen for kitchen view */
+:fullscreen .order-card,
+.fullscreen-mode .order-card {
+  font-size: 1.1rem;
+  padding: 1.25rem;
+}
+
+:fullscreen .board-col,
+.fullscreen-mode .board-col {
+  min-width: 300px;
+}
+
+:fullscreen h1,
+.fullscreen-mode h1 {
+  font-size: 2.5rem;
+}
+
+:fullscreen .action-btn,
+.fullscreen-mode .action-btn {
+  padding: 10px 18px;
+  font-size: 14px;
+}
+
+/* Hide admin sidebar and header in fullscreen */
+:fullscreen app-admin-sidebar,
+:fullscreen app-admin-header,
+:fullscreen app-subscription-banner {
+  display: none;
+}

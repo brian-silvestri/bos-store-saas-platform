@@ -1,0 +1,184 @@
+<div class="space-y-4">
+  <div class="flex items-center justify-between">
+    <div>
+      <h1 class="text-2xl font-semibold text-[var(--neutral-text)]">Promotion management</h1>
+      <p class="text-sm text-[var(--neutral-muted)]">Create discounts, NxM, and bundles</p>
+    </div>
+    <div class="flex items-center gap-2">
+      <button class="btn-primary" (click)="toggleForm()">
+        {{ formOpen ? 'Cerrar' : '+ New promotion' }}
+      </button>
+    </div>
+  </div>
+
+  <form
+    *ngIf="formOpen"
+    class="bg-[var(--surface)] border border-[var(--neutral-border)] rounded-xl p-4 shadow-sm space-y-4"
+    (ngSubmit)="savePromotion()"
+  >
+    <div class="flex items-center justify-between">
+      <h3 class="text-lg font-semibold text-[var(--neutral-text)]">
+        {{ editingId ? 'Edit promotion' : 'New promotion' }}
+      </h3>
+      <button class="text-sm text-[var(--neutral-muted)] hover:text-[var(--primary)]" type="button" (click)="resetForm()">
+        Limpiar
+      </button>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-3 text-sm">
+      <div class="flex flex-col gap-1">
+        <label class="text-[var(--neutral-muted)]">Name *</label>
+        <input
+          class="border border-[var(--neutral-border)] rounded-lg px-3 py-2"
+          name="promoName"
+          [(ngModel)]="form.name"
+          required
+        />
+      </div>
+      <div class="flex flex-col gap-1">
+        <label class="text-[var(--neutral-muted)]">Type</label>
+        <select
+          class="border border-[var(--neutral-border)] rounded-lg px-3 py-2"
+          name="promoType"
+          [(ngModel)]="form.type"
+        >
+          <option value="discount">Discount %</option>
+          <option value="nxm">NxM (2x1, 3x2)</option>
+          <option value="bundle">Kit</option>
+        </select>
+      </div>
+      <div class="md:col-span-2 flex flex-col gap-1">
+        <label class="text-[var(--neutral-muted)]">Description</label>
+        <textarea
+          class="border border-[var(--neutral-border)] rounded-lg px-3 py-2"
+          name="promoDescription"
+          rows="3"
+          [(ngModel)]="form.description"
+        ></textarea>
+      </div>
+      <div class="flex flex-col gap-1">
+        <label class="text-[var(--neutral-muted)]">Image (URL)</label>
+        <input
+          class="border border-[var(--neutral-border)] rounded-lg px-3 py-2"
+          name="promoImage"
+          [(ngModel)]="form.imageUrl"
+        />
+      </div>
+      <div class="flex flex-col gap-1">
+        <label class="text-[var(--neutral-muted)]">Price (optional)</label>
+        <input
+          class="border border-[var(--neutral-border)] rounded-lg px-3 py-2"
+          name="promoPrice"
+          type="number"
+          min="0"
+          [(ngModel)]="form.price"
+        />
+        <p class="text-xs text-[var(--neutral-muted)]">If left empty, price is calculated from products.</p>
+      </div>
+
+      <div *ngIf="form.type === 'discount'" class="flex flex-col gap-1">
+        <label class="text-[var(--neutral-muted)]">% Descuento</label>
+        <input
+          class="border border-[var(--neutral-border)] rounded-lg px-3 py-2"
+          name="promoPercent"
+          type="number"
+          min="1"
+          max="90"
+          [(ngModel)]="form.percentage"
+        />
+      </div>
+
+      <div *ngIf="form.type === 'nxm'" class="grid grid-cols-2 gap-3">
+        <div class="flex flex-col gap-1">
+          <label class="text-[var(--neutral-muted)]">Buy</label>
+          <input
+            class="border border-[var(--neutral-border)] rounded-lg px-3 py-2"
+            name="promoBuyQty"
+            type="number"
+            min="2"
+            [(ngModel)]="form.buyQty"
+          />
+        </div>
+        <div class="flex flex-col gap-1">
+          <label class="text-[var(--neutral-muted)]">Pay</label>
+          <input
+            class="border border-[var(--neutral-border)] rounded-lg px-3 py-2"
+            name="promoPayQty"
+            type="number"
+            min="1"
+            [(ngModel)]="form.payQty"
+          />
+        </div>
+      </div>
+
+      <label class="flex items-center gap-2 text-[var(--neutral-muted)]">
+        <input type="checkbox" name="promoActive" [(ngModel)]="form.active" />
+        Active
+      </label>
+    </div>
+
+    <div class="space-y-2">
+      <p class="text-sm text-[var(--neutral-muted)]">Included products *</p>
+      <div class="grid md:grid-cols-2 gap-2 max-h-48 overflow-auto border border-[var(--neutral-border)] rounded-lg p-3 bg-[var(--neutral-surface)]">
+        <label
+          *ngFor="let p of products()"
+          class="flex items-center gap-2 text-sm text-[var(--neutral-text)]"
+        >
+          <input type="checkbox" [checked]="isSelected(p.id)" (change)="toggleProduct(p.id)" />
+          <span>{{ p.name }}</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-3 pt-2">
+      <button class="btn-primary" type="submit">
+        {{ editingId ? 'Save changes' : 'Create promotion' }}
+      </button>
+      <button
+        class="px-4 py-2 rounded-lg border border-[var(--neutral-border)] text-sm text-[var(--neutral-subtle)]"
+        type="button"
+        (click)="toggleForm()"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+
+  <div class="bg-[var(--surface)] border border-[var(--neutral-border)] rounded-xl shadow-sm">
+    <div class="overflow-auto">
+      <table class="min-w-full text-sm text-[var(--neutral-text)]">
+        <thead class="bg-[var(--neutral-surface)] text-xs text-[var(--neutral-muted)] border-b border-[var(--neutral-border)]">
+          <tr>
+            <th class="px-4 py-3 text-left">Promotion</th>
+            <th class="px-4 py-3 text-left">Type</th>
+            <th class="px-4 py-3 text-left">Products</th>
+            <th class="px-4 py-3 text-left">Status</th>
+            <th class="px-4 py-3 text-left">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let promo of promotions()"
+            class="border-b border-[var(--neutral-border)] hover:bg-[var(--neutral-surface)]"
+          >
+            <td class="px-4 py-3">{{ promo.name }}</td>
+            <td class="px-4 py-3 text-[var(--neutral-muted)]">{{ typeLabel(promo) }}</td>
+            <td class="px-4 py-3 text-[var(--neutral-muted)]">{{ promo.productIds.length }}</td>
+            <td class="px-4 py-3 text-[var(--neutral-muted)]">{{ promo.active ? 'Active' : 'Paused' }}</td>
+            <td class="px-4 py-3">
+              <div class="flex gap-2">
+                <button class="btn-outline px-3 py-1" (click)="editPromotion(promo)">Edit</button>
+                <button class="btn-danger px-3 py-1" (click)="deletePromotion(promo)">Delete</button>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="promotions().length === 0">
+            <td colspan="5" class="px-4 py-6 text-center text-[var(--neutral-muted)]">
+              No promotions created.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

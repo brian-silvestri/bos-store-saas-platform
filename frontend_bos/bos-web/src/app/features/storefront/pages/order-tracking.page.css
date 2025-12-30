@@ -1,0 +1,7 @@
+.timeline-line {
+  position: absolute;
+  left: 11px;
+  top: 24px;
+  width: 2px;
+  background: var(--border);
+}

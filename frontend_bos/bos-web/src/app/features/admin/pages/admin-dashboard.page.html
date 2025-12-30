@@ -1,0 +1,58 @@
+<div class="space-y-4">
+  <div>
+    <h1 class="text-2xl font-semibold text-[var(--neutral-text)]">Dashboard</h1>
+    <p class="text-sm text-[var(--neutral-muted)]">Quick overview of your store</p>
+  </div>
+
+  <div class="grid md:grid-cols-4 gap-4">
+    <div class="bg-[var(--surface)] border border-[var(--neutral-border)] rounded-xl p-4 shadow-sm">
+      <p class="text-xs text-[var(--neutral-muted)]">Today's sales</p>
+      <p class="text-2xl font-semibold text-[var(--neutral-text)]">$2,450</p>
+    </div>
+    <div class="bg-[var(--surface)] border border-[var(--neutral-border)] rounded-xl p-4 shadow-sm">
+      <p class="text-xs text-[var(--neutral-muted)]">Active orders</p>
+      <p class="text-2xl font-semibold text-[var(--neutral-text)]">12</p>
+    </div>
+    <div class="bg-[var(--surface)] border border-[var(--neutral-border)] rounded-xl p-4 shadow-sm">
+      <p class="text-xs text-[var(--neutral-muted)]">Products</p>
+      <p class="text-2xl font-semibold text-[var(--neutral-text)]">342</p>
+    </div>
+    <div class="bg-[var(--surface)] border border-[var(--neutral-border)] rounded-xl p-4 shadow-sm">
+      <p class="text-xs text-[var(--neutral-muted)]">Customers</p>
+      <p class="text-2xl font-semibold text-[var(--neutral-text)]">1,204</p>
+    </div>
+  </div>
+
+  <div class="bg-[var(--surface)] border border-[var(--neutral-border)] rounded-xl p-4 shadow-sm">
+    <div class="flex items-center justify-between mb-3">
+      <div>
+        <p class="text-sm font-semibold text-[var(--neutral-text)]">Weekly sales</p>
+        <p class="text-xs text-[var(--neutral-muted)]">Last 7 days</p>
+      </div>
+      <span class="text-xs text-[var(--neutral-muted)]">+12% vs last week</span>
+    </div>
+    <svg viewBox="0 0 320 120" class="w-full h-32">
+      <defs>
+        <linearGradient id="salesFill" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stop-color="var(--secondary)" stop-opacity="0.3" />
+          <stop offset="100%" stop-color="var(--secondary)" stop-opacity="0" />
+        </linearGradient>
+      </defs>
+      <path
+        d="M10 90 L60 70 L110 78 L160 48 L210 60 L260 30 L310 40"
+        fill="none"
+        stroke="var(--primary)"
+        stroke-width="3"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M10 90 L60 70 L110 78 L160 48 L210 60 L260 30 L310 40 L310 110 L10 110 Z"
+        fill="url(#salesFill)"
+      />
+    </svg>
+    <div class="flex justify-between text-[11px] text-[var(--neutral-muted)] mt-2">
+      <span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,129 @@
+<section class="max-w-6xl mx-auto space-y-6">
+  <div class="flex flex-wrap items-center justify-between gap-3">
+    <a routerLink="/store" class="btn-outline inline-flex items-center">
+      Volver a tienda
+    </a>
+    <a routerLink="/cart" class="btn-outline inline-flex items-center">
+      Ver carrito
+    </a>
+  </div>
+
+  <div *ngIf="promo() as promo; else missing" class="space-y-8">
+    <div class="card overflow-hidden">
+      <div class="grid md:grid-cols-[1.1fr_0.9fr] gap-6 items-center">
+        <div class="space-y-4">
+          <div class="inline-flex items-center gap-2 bg-[var(--surface-soft)] text-[var(--text-strong)] text-xs font-semibold px-3 py-1 rounded-full">
+            <span class="h-2 w-2 rounded-full bg-[var(--accent)]"></span>
+            Promo activa
+          </div>
+          <h1 class="text-3xl md:text-4xl font-semibold text-[var(--text-strong)]">{{ promo.name }}</h1>
+          <p class="text-sm md:text-base text-[var(--text)] max-w-xl">
+            {{ promo.description || 'Aprovecha esta promo por tiempo limitado y potencia tu moto con los mejores repuestos.' }}
+          </p>
+          <div class="flex flex-wrap items-center gap-4">
+            <div class="text-xs text-[var(--text-muted)]">Incluye {{ promo.productIds.length }} productos</div>
+            <span class="bg-[var(--secondary)] text-white text-[11px] font-bold px-2 py-1 rounded-full shadow">
+              {{ typeLabel() }}
+            </span>
+          </div>
+          <div class="flex flex-wrap items-center gap-4">
+            <p class="text-2xl font-semibold text-[var(--accent)]">
+              {{ store.currencySymbol }} {{ cart.getUnitPriceForItem({ type: 'promo', promo: promo, quantity: 1 }) }}
+            </p>
+            <button class="btn-primary" (click)="cart.addPromo(promo, 1)">Agregar combo</button>
+            <a href="#promo-carousel" class="btn-outline">Ver destacados</a>
+          </div>
+        </div>
+        <div class="relative h-56 md:h-72 rounded-xl overflow-hidden bg-[var(--surface-soft)]">
+          <img
+            *ngIf="promo.imageUrl"
+            [src]="promo.imageUrl"
+            [alt]="promo.name"
+            class="w-full h-full object-cover"
+          />
+          <div class="absolute inset-0 bg-[linear-gradient(135deg,rgba(0,0,0,0.15),transparent)]"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-4">
+      <div class="card space-y-2">
+        <p class="text-xs text-[var(--text-muted)]">Beneficio 01</p>
+        <p class="text-base font-semibold text-[var(--text-strong)]">Envios a todo el pais</p>
+        <p class="text-sm text-[var(--text)]">Despachos rapidos y seguimiento en linea.</p>
+      </div>
+      <div class="card space-y-2">
+        <p class="text-xs text-[var(--text-muted)]">Beneficio 02</p>
+        <p class="text-base font-semibold text-[var(--text-strong)]">Descuentos por transferencia</p>
+        <p class="text-sm text-[var(--text)]">Ahorra mas pagando con transferencia bancaria.</p>
+      </div>
+      <div class="card space-y-2">
+        <p class="text-xs text-[var(--text-muted)]">Beneficio 03</p>
+        <p class="text-base font-semibold text-[var(--text-strong)]">Soporte especializado</p>
+        <p class="text-sm text-[var(--text)]">Te ayudamos a elegir el combo ideal.</p>
+      </div>
+    </div>
+
+    <div class="card space-y-4" id="promo-carousel">
+      <div class="flex items-center justify-between">
+        <h2 class="text-lg font-semibold text-[var(--text-strong)]">Productos destacados del combo</h2>
+        <span class="text-xs text-[var(--text-muted)]">Desliza para ver mas</span>
+      </div>
+      <div class="flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory scroll-smooth">
+        <div
+          *ngFor="let p of promoProducts()"
+          class="min-w-[220px] sm:min-w-[260px] snap-start border border-[var(--border)] rounded-lg p-4 bg-[var(--surface)] space-y-3"
+        >
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="font-semibold text-[var(--text-strong)]">{{ p.name }}</p>
+              <p class="text-xs text-[var(--text-muted)]">{{ p.category }}</p>
+            </div>
+            <a [routerLink]="['/product', p.id]" [queryParams]="{ promo: promo.id }" class="btn-outline text-xs">
+              Ver
+            </a>
+          </div>
+          <p class="text-sm text-[var(--text)]">
+            {{ store.currencySymbol }} {{ p.price ?? 'N/A' }}
+          </p>
+          <button class="btn-primary w-full" (click)="cart.add(p, 1)">
+            Agregar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card space-y-3">
+      <div class="flex items-center justify-between">
+        <h3 class="text-lg font-semibold text-[var(--text-strong)]">Lista completa del combo</h3>
+        <a routerLink="/store" class="btn-outline text-xs">Seguir comprando</a>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div
+          *ngFor="let p of promoProducts()"
+          class="border border-[var(--border)] rounded-lg p-3 bg-[var(--surface)]"
+        >
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="font-semibold text-[var(--text-strong)]">{{ p.name }}</p>
+              <p class="text-xs text-[var(--text-muted)]">{{ p.category }}</p>
+            </div>
+            <a [routerLink]="['/product', p.id]" [queryParams]="{ promo: promo.id }" class="btn-outline text-xs">
+              Ver
+            </a>
+          </div>
+          <p class="text-sm text-[var(--text)] mt-2">
+            {{ store.currencySymbol }} {{ p.price ?? 'N/A' }}
+          </p>
+          <button class="btn-primary mt-3 w-full" (click)="cart.add(p, 1)">
+            Agregar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #missing>
+    <div class="card text-center text-[var(--text-muted)]">Promocion no encontrada.</div>
+  </ng-template>
+</section>

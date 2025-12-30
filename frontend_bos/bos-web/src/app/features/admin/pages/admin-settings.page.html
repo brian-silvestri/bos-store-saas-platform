@@ -1,0 +1,579 @@
+<div class="max-w-6xl mx-auto p-6">
+  <!-- HEADER -->
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold text-[var(--neutral-text)] mb-2">Configuración de Tienda</h1>
+    <p class="text-[var(--neutral-muted)]">Personaliza la apariencia y datos de tu tienda</p>
+  </div>
+
+  <!-- MAIN CARD -->
+  <div class="bg-[var(--surface)] rounded-xl shadow-sm border border-[var(--neutral-border)] overflow-hidden">
+
+    <!-- TABS NAVIGATION -->
+    <div class="border-b border-[var(--neutral-border)] bg-gradient-to-b from-[var(--surface)] to-[var(--surface-soft)]">
+      <nav class="flex px-6" role="tablist">
+        <button
+          type="button"
+          role="tab"
+          (click)="setTab('info')"
+          [attr.aria-selected]="currentTab() === 'info'"
+          [class]="currentTab() === 'info'
+            ? 'border-b-2 border-[var(--primary)] text-[var(--primary)]'
+            : 'text-[var(--neutral-muted)] hover:text-[var(--neutral-text)]'"
+          class="px-4 py-4 text-sm font-medium transition-colors cursor-pointer"
+        >
+          Información
+        </button>
+
+        <button
+          type="button"
+          role="tab"
+          (click)="setTab('theme')"
+          [attr.aria-selected]="currentTab() === 'theme'"
+          [class]="currentTab() === 'theme'
+            ? 'border-b-2 border-[var(--primary)] text-[var(--primary)]'
+            : 'text-[var(--neutral-muted)] hover:text-[var(--neutral-text)]'"
+          class="px-4 py-4 text-sm font-medium transition-colors cursor-pointer"
+        >
+          Apariencia
+        </button>
+
+        <button
+          type="button"
+          role="tab"
+          (click)="setTab('social')"
+          [attr.aria-selected]="currentTab() === 'social'"
+          [class]="currentTab() === 'social'
+            ? 'border-b-2 border-[var(--primary)] text-[var(--primary)]'
+            : 'text-[var(--neutral-muted)] hover:text-[var(--neutral-text)]'"
+          class="px-4 py-4 text-sm font-medium transition-colors cursor-pointer"
+        >
+          Redes Sociales
+        </button>
+
+        <button
+          type="button"
+          role="tab"
+          (click)="setTab('carousel')"
+          [attr.aria-selected]="currentTab() === 'carousel'"
+          [class]="currentTab() === 'carousel'
+            ? 'border-b-2 border-[var(--primary)] text-[var(--primary)]'
+            : 'text-[var(--neutral-muted)] hover:text-[var(--neutral-text)]'"
+          class="px-4 py-4 text-sm font-medium transition-colors cursor-pointer"
+        >
+          Carrousel
+        </button>
+      </nav>
+    </div>
+
+    <!-- TAB CONTENT -->
+    <div class="p-8">
+
+      <!-- TAB 1: INFORMACIÓN BÁSICA -->
+      @if (currentTab() === 'info') {
+        <div class="space-y-6 animate-fade-in">
+          <div class="mb-6">
+            <h2 class="text-lg font-semibold text-[var(--neutral-text)] mb-1">Información Básica</h2>
+            <p class="text-sm text-[var(--neutral-muted)]">Datos principales de tu tienda</p>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <!-- Nombre -->
+            <div class="space-y-2">
+              <label class="block text-sm font-medium text-[var(--neutral-text)]">
+                Nombre de la tienda
+                <span class="text-red-500 ml-1">*</span>
+              </label>
+              <input
+                type="text"
+                [(ngModel)]="store.config.name"
+                placeholder="Mi Tienda Online"
+                class="w-full px-4 py-2.5 text-sm border border-[var(--neutral-border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent transition-all bg-white"
+              />
+            </div>
+
+            <!-- WhatsApp -->
+            <div class="space-y-2">
+              <label class="block text-sm font-medium text-[var(--neutral-text)]">
+                Número WhatsApp
+                <span class="text-red-500 ml-1">*</span>
+              </label>
+              <input
+                type="text"
+                [(ngModel)]="store.config.whatsappNumber"
+                placeholder="+54 9 11 1234-5678"
+                class="w-full px-4 py-2.5 text-sm border border-[var(--neutral-border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent transition-all bg-white"
+              />
+              <p class="text-xs text-[var(--neutral-muted)] mt-1">Incluye código de país (+54 para Argentina)</p>
+            </div>
+
+            <!-- Dirección -->
+            <div class="space-y-2">
+              <label class="block text-sm font-medium text-[var(--neutral-text)]">
+                Dirección
+              </label>
+              <input
+                type="text"
+                [(ngModel)]="store.config.address"
+                placeholder="Av. Corrientes 1234, CABA"
+                class="w-full px-4 py-2.5 text-sm border border-[var(--neutral-border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent transition-all bg-white"
+              />
+            </div>
+
+            <!-- Moneda -->
+            <div class="space-y-2">
+              <label class="block text-sm font-medium text-[var(--neutral-text)]">
+                Moneda
+              </label>
+              <select
+                [(ngModel)]="store.config.currency"
+                class="w-full px-4 py-2.5 text-sm border border-[var(--neutral-border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent transition-all bg-white cursor-pointer"
+              >
+                <option value="ARS">Peso Argentino (ARS)</option>
+                <option value="USD">Dólar Estadounidense (USD)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Logo -->
+          <div class="space-y-3 pt-6 border-t border-[var(--neutral-border)]">
+            <label class="block text-sm font-medium text-[var(--neutral-text)]">
+              Logo de la Tienda
+            </label>
+            <div class="flex items-start gap-4">
+              @if (store.config.logoUrl) {
+                <div class="relative group">
+                  <img
+                    [src]="store.config.logoUrl"
+                    alt="Logo"
+                    class="h-20 w-20 object-contain rounded-lg border border-[var(--neutral-border)] bg-white p-2"
+                  />
+                  <button
+                    type="button"
+                    (click)="clearLogo()"
+                    class="absolute -top-2 -right-2 w-6 h-6 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors text-xs flex items-center justify-center opacity-0 group-hover:opacity-100"
+                  >
+                    ×
+                  </button>
+                </div>
+              }
+              <div class="flex-1">
+                <input
+                  type="file"
+                  accept="image/*"
+                  (change)="onLogoFileChange($event)"
+                  class="hidden"
+                  #fileInput
+                />
+                <button
+                  type="button"
+                  (click)="fileInput.click()"
+                  class="px-4 py-2.5 text-sm bg-[var(--primary)] text-white rounded-lg hover:opacity-90 transition-opacity font-medium"
+                >
+                  {{ store.config.logoUrl ? 'Cambiar Logo' : 'Subir Logo' }}
+                </button>
+                <p class="text-xs text-[var(--neutral-muted)] mt-2">JPG, PNG o SVG. Tamaño recomendado: 200x200px</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+
+      <!-- TAB 2: TEMA Y COLORES -->
+      @if (currentTab() === 'theme') {
+        <div class="space-y-6 animate-fade-in">
+          <div class="mb-6">
+            <h2 class="text-lg font-semibold text-[var(--neutral-text)] mb-1">Apariencia</h2>
+            <p class="text-sm text-[var(--neutral-muted)]">Personaliza la identidad visual de tu tienda</p>
+          </div>
+
+          <!-- Tema Predefinido -->
+          <div class="space-y-3">
+            <label class="block text-sm font-medium text-[var(--neutral-text)]">
+              Tema Predefinido
+            </label>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+              @for (theme of store.availableThemes; track theme.key) {
+                <button
+                  type="button"
+                  (click)="onThemeChange(theme.key)"
+                  [class]="store.config.themeKey === theme.key
+                    ? 'ring-2 ring-[var(--primary)] border-[var(--primary)] shadow-sm'
+                    : 'border-[var(--neutral-border)] hover:border-[var(--primary)]'"
+                  class="p-3 border rounded-lg transition-all cursor-pointer bg-white"
+                >
+                  <div class="flex gap-2 mb-2">
+                    <div class="w-6 h-6 rounded" [style.background-color]="theme.primaryColor"></div>
+                    <div class="w-6 h-6 rounded" [style.background-color]="theme.secondaryColor"></div>
+                  </div>
+                  <p class="text-xs font-medium text-[var(--neutral-text)]">{{ theme.label }}</p>
+                </button>
+              }
+            </div>
+          </div>
+
+          <!-- Colores Personalizados -->
+          <div class="pt-6 border-t border-[var(--neutral-border)]">
+            <h3 class="text-sm font-medium text-[var(--neutral-text)] mb-4">Personalización de Colores</h3>
+            <div class="grid md:grid-cols-2 gap-6">
+              <!-- Color Primario -->
+              <div class="space-y-3">
+                <label class="block text-sm font-medium text-[var(--neutral-text)]">Color Primario</label>
+                <div class="flex items-center gap-3">
+                  <input
+                    type="color"
+                    [(ngModel)]="store.config.primaryColor"
+                    (ngModelChange)="onColorChange()"
+                    class="w-14 h-14 rounded-lg cursor-pointer border border-[var(--neutral-border)]"
+                  />
+                  <div class="flex-1">
+                    <input
+                      type="text"
+                      [(ngModel)]="store.config.primaryColor"
+                      (ngModelChange)="onColorChange()"
+                      class="w-full px-4 py-2.5 text-sm border border-[var(--neutral-border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent transition-all font-mono uppercase bg-white"
+                      placeholder="#FF6B35"
+                    />
+                    <p class="text-xs text-[var(--neutral-muted)] mt-1">Botones y elementos principales</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Color Secundario -->
+              <div class="space-y-3">
+                <label class="block text-sm font-medium text-[var(--neutral-text)]">Color Secundario</label>
+                <div class="flex items-center gap-3">
+                  <input
+                    type="color"
+                    [(ngModel)]="store.config.secondaryColor"
+                    (ngModelChange)="onColorChange()"
+                    class="w-14 h-14 rounded-lg cursor-pointer border border-[var(--neutral-border)]"
+                  />
+                  <div class="flex-1">
+                    <input
+                      type="text"
+                      [(ngModel)]="store.config.secondaryColor"
+                      (ngModelChange)="onColorChange()"
+                      class="w-full px-4 py-2.5 text-sm border border-[var(--neutral-border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:border-transparent transition-all font-mono uppercase bg-white"
+                      placeholder="#F7931E"
+                    />
+                    <p class="text-xs text-[var(--neutral-muted)] mt-1">Acentos y elementos secundarios</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Preview -->
+          <div class="bg-[var(--surface-soft)] border border-[var(--neutral-border)] rounded-lg p-6">
+            <h3 class="text-sm font-medium text-[var(--neutral-text)] mb-4">Vista Previa</h3>
+            <div class="flex items-center gap-3 flex-wrap">
+              <button
+                class="px-5 py-2.5 rounded-lg text-white text-sm font-medium"
+                [style.background-color]="store.config.primaryColor"
+              >
+                Botón Primario
+              </button>
+              <button
+                class="px-5 py-2.5 rounded-lg text-white text-sm font-medium"
+                [style.background-color]="store.config.secondaryColor"
+              >
+                Botón Secundario
+              </button>
+              <span
+                class="px-3 py-1.5 rounded-full text-white text-xs font-medium"
+                [style.background-color]="store.config.primaryColor"
+              >
+                Etiqueta
+              </span>
+            </div>
+          </div>
+        </div>
+      }
+
+      <!-- TAB 3: REDES SOCIALES -->
+      @if (currentTab() === 'social') {
+        <div class="space-y-6 animate-fade-in">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <h2 class="text-lg font-semibold text-[var(--neutral-text)] mb-1">Redes Sociales</h2>
+              <p class="text-sm text-[var(--neutral-muted)]">Agrega hasta 3 redes sociales</p>
+            </div>
+            @if (canAddSocialMedia()) {
+              <button
+                type="button"
+                (click)="addSocialMedia()"
+                class="px-4 py-2 text-sm bg-[var(--primary)] text-white rounded-lg hover:opacity-90 transition-opacity font-medium"
+              >
+                Agregar Red
+              </button>
+            }
+          </div>
+
+          @if (socialMedia.length === 0) {
+            <div class="text-center py-12 bg-[var(--surface-soft)] rounded-lg border border-dashed border-[var(--neutral-border)]">
+              <svg class="mx-auto h-12 w-12 text-[var(--neutral-muted)] mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+              <p class="text-sm text-[var(--neutral-text)] font-medium mb-1">No hay redes configuradas</p>
+              <p class="text-xs text-[var(--neutral-muted)] mb-4">Agrega tus redes sociales para conectar con tus clientes</p>
+              <button
+                type="button"
+                (click)="addSocialMedia()"
+                class="px-4 py-2 text-sm bg-[var(--primary)] text-white rounded-lg hover:opacity-90 transition-opacity font-medium"
+              >
+                Agregar Primera Red
+              </button>
+            </div>
+          } @else {
+            <div class="space-y-3">
+              @for (social of socialMedia; track $index) {
+                <div class="bg-white border border-[var(--neutral-border)] rounded-lg p-4 hover:shadow-sm transition-shadow">
+                  <div class="flex items-center gap-4">
+                    <div class="flex-shrink-0 w-8 h-8 rounded-full bg-[var(--primary)] bg-opacity-10 flex items-center justify-center text-sm font-semibold text-[var(--primary)]">
+                      {{ $index + 1 }}
+                    </div>
+                    <div class="flex-1 grid md:grid-cols-2 gap-3">
+                      <div class="space-y-1.5">
+                        <label class="block text-xs font-medium text-[var(--neutral-text)]">Plataforma</label>
+                        <select
+                          [(ngModel)]="social.type"
+                          class="w-full px-3 py-2 text-sm border border-[var(--neutral-border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)] transition-all bg-white cursor-pointer"
+                        >
+                          <option value="instagram">Instagram</option>
+                          <option value="facebook">Facebook</option>
+                          <option value="twitter">Twitter / X</option>
+                          <option value="linkedin">LinkedIn</option>
+                        </select>
+                      </div>
+                      <div class="space-y-1.5">
+                        <label class="block text-xs font-medium text-[var(--neutral-text)]">URL del Perfil</label>
+                        <input
+                          type="url"
+                          [(ngModel)]="social.url"
+                          placeholder="https://instagram.com/mitienda"
+                          class="w-full px-3 py-2 text-sm border border-[var(--neutral-border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)] transition-all bg-white"
+                        />
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      (click)="removeSocialMedia($index)"
+                      class="flex-shrink-0 w-8 h-8 text-red-500 hover:bg-red-50 rounded-lg transition-colors flex items-center justify-center text-lg"
+                      title="Eliminar"
+                    >
+                      ×
+                    </button>
+                  </div>
+                </div>
+              }
+            </div>
+          }
+        </div>
+      }
+
+      <!-- TAB 4: CARROUSEL -->
+      @if (currentTab() === 'carousel') {
+        <div class="space-y-6 animate-fade-in">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <h2 class="text-lg font-semibold text-[var(--neutral-text)] mb-1">Carrousel Principal</h2>
+              <p class="text-sm text-[var(--neutral-muted)]">Hasta 4 slides para tu página de inicio</p>
+            </div>
+            @if (canAddSlide()) {
+              <button
+                type="button"
+                (click)="addNewSlide()"
+                class="px-4 py-2 text-sm bg-[var(--primary)] text-white rounded-lg hover:opacity-90 transition-opacity font-medium"
+              >
+                Agregar Slide
+              </button>
+            }
+          </div>
+
+          <div class="space-y-4">
+            @for (slide of carouselSlides; track $index) {
+              <div class="bg-white border border-[var(--neutral-border)] rounded-lg p-4 hover:shadow-sm transition-shadow">
+                <div class="flex gap-4">
+                  <!-- Controles de orden -->
+                  <div class="flex flex-col gap-1.5 flex-shrink-0">
+                    <button
+                      type="button"
+                      (click)="moveSlideUp($index)"
+                      [disabled]="$index === 0"
+                      class="w-7 h-7 bg-[var(--surface-soft)] rounded hover:bg-[var(--surface-muted)] disabled:opacity-30 disabled:cursor-not-allowed transition-colors flex items-center justify-center text-sm"
+                      title="Mover arriba"
+                    >
+                      ↑
+                    </button>
+                    <div class="w-7 h-7 bg-[var(--primary)] bg-opacity-10 rounded flex items-center justify-center text-xs font-semibold text-[var(--primary)]">
+                      {{ $index + 1 }}
+                    </div>
+                    <button
+                      type="button"
+                      (click)="moveSlideDown($index)"
+                      [disabled]="$index === carouselSlides.length - 1"
+                      class="w-7 h-7 bg-[var(--surface-soft)] rounded hover:bg-[var(--surface-muted)] disabled:opacity-30 disabled:cursor-not-allowed transition-colors flex items-center justify-center text-sm"
+                      title="Mover abajo"
+                    >
+                      ↓
+                    </button>
+                  </div>
+
+                  <!-- Formulario del slide -->
+                  <div class="flex-1 space-y-3">
+                    <!-- Imagen -->
+                    <div class="space-y-1.5">
+                      <label class="block text-xs font-medium text-[var(--neutral-text)]">Imagen de Fondo</label>
+                      <div class="flex items-center gap-3">
+                        <img [src]="slide.image" alt="Preview" class="w-24 h-16 object-cover rounded-lg border border-[var(--neutral-border)]" />
+                        <input
+                          type="file"
+                          accept="image/*"
+                          (change)="onSlideImageChange($event, $index)"
+                          class="hidden"
+                          #slideFileInput
+                        />
+                        <button
+                          type="button"
+                          (click)="slideFileInput.click()"
+                          class="px-3 py-1.5 text-xs bg-[var(--surface-soft)] hover:bg-[var(--surface-muted)] rounded-lg transition-colors font-medium"
+                        >
+                          Cambiar
+                        </button>
+                        <span class="text-xs text-[var(--neutral-muted)]">1920x1080px</span>
+                      </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-3">
+                      <!-- Título -->
+                      <div class="space-y-1.5">
+                        <label class="block text-xs font-medium text-[var(--neutral-text)]">Título</label>
+                        <input
+                          type="text"
+                          [(ngModel)]="slide.title"
+                          placeholder="Título principal"
+                          class="w-full px-3 py-2 text-sm border border-[var(--neutral-border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)] transition-all bg-white"
+                        />
+                      </div>
+
+                      <!-- Subtítulo -->
+                      <div class="space-y-1.5">
+                        <label class="block text-xs font-medium text-[var(--neutral-text)]">Subtítulo</label>
+                        <input
+                          type="text"
+                          [(ngModel)]="slide.subtitle"
+                          placeholder="Descripción"
+                          class="w-full px-3 py-2 text-sm border border-[var(--neutral-border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)] transition-all bg-white"
+                        />
+                      </div>
+
+                      <!-- Texto del botón -->
+                      <div class="space-y-1.5">
+                        <label class="block text-xs font-medium text-[var(--neutral-text)]">Texto del Botón</label>
+                        <input
+                          type="text"
+                          [(ngModel)]="slide.buttonText"
+                          placeholder="Ver Más"
+                          class="w-full px-3 py-2 text-sm border border-[var(--neutral-border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)] transition-all bg-white"
+                        />
+                      </div>
+
+                      <!-- Link del botón -->
+                      <div class="space-y-1.5">
+                        <label class="block text-xs font-medium text-[var(--neutral-text)]">Enlace</label>
+                        <input
+                          type="text"
+                          [(ngModel)]="slide.buttonLink"
+                          placeholder="/store"
+                          class="w-full px-3 py-2 text-sm border border-[var(--neutral-border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)] transition-all bg-white"
+                        />
+                      </div>
+                    </div>
+
+                    <!-- Activo -->
+                    <div class="flex items-center gap-2">
+                      <input
+                        type="checkbox"
+                        [(ngModel)]="slide.active"
+                        class="w-4 h-4 text-[var(--primary)] rounded focus:ring-2 focus:ring-[var(--primary)] cursor-pointer"
+                        [id]="'slide-active-' + $index"
+                      />
+                      <label [for]="'slide-active-' + $index" class="text-xs font-medium text-[var(--neutral-text)] cursor-pointer">
+                        Slide activo
+                      </label>
+                    </div>
+                  </div>
+
+                  <!-- Botón eliminar -->
+                  <div class="flex-shrink-0">
+                    <button
+                      type="button"
+                      (click)="removeSlide($index)"
+                      class="w-8 h-8 text-red-500 hover:bg-red-50 rounded-lg transition-colors flex items-center justify-center text-lg"
+                      title="Eliminar slide"
+                    >
+                      ×
+                    </button>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- FOOTER CON NAVEGACIÓN Y GUARDAR -->
+    <div class="border-t border-[var(--neutral-border)] bg-[var(--surface-soft)] px-8 py-4">
+      <div class="flex items-center justify-between gap-4">
+        <!-- Botón Anterior -->
+        <button
+          type="button"
+          (click)="prevTab()"
+          [disabled]="!canGoPrev"
+          class="px-5 py-2 text-sm bg-white border border-[var(--neutral-border)] text-[var(--neutral-text)] rounded-lg hover:bg-gray-50 transition-colors font-medium disabled:opacity-40 disabled:cursor-not-allowed"
+        >
+          ← Anterior
+        </button>
+
+        <!-- Botón Guardar (Centro) -->
+        <button
+          type="button"
+          (click)="saveChanges()"
+          [disabled]="saving()"
+          class="px-6 py-2 text-sm bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed shadow-sm"
+        >
+          @if (saving()) {
+            Guardando...
+          } @else {
+            Guardar Cambios
+          }
+        </button>
+
+        <!-- Botón Siguiente -->
+        <button
+          type="button"
+          (click)="nextTab()"
+          [disabled]="!canGoNext"
+          class="px-5 py-2 text-sm bg-white border border-[var(--neutral-border)] text-[var(--neutral-text)] rounded-lg hover:bg-gray-50 transition-colors font-medium disabled:opacity-40 disabled:cursor-not-allowed"
+        >
+          Siguiente →
+        </button>
+      </div>
+
+      <!-- Info -->
+      <div class="text-center mt-3">
+        <p class="text-xs text-[var(--neutral-muted)]">
+          Los cambios se aplicarán automáticamente en tu Landing Page y Store
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MENSAJE DE ÉXITO -->
+  @if (savedSuccessfully()) {
+    <div class="fixed bottom-6 right-6 bg-green-600 text-white px-5 py-3 rounded-lg shadow-lg animate-fade-in z-50">
+      <p class="text-sm font-medium">Cambios guardados exitosamente</p>
+    </div>
+  }
+</div>

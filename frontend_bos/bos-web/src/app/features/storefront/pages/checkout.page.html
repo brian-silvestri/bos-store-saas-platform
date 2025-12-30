@@ -1,0 +1,234 @@
+<section class="max-w-5xl mx-auto space-y-6">
+  <div class="flex items-center gap-3">
+    <div class="w-10 h-1 rounded-full bg-[var(--secondary)]"></div>
+    <h2 class="text-2xl font-semibold text-[var(--accent)]">Checkout</h2>
+  </div>
+
+  <div class="bg-[var(--surface-soft-alt)] border border-[var(--border)] text-[var(--text)] px-4 py-3 rounded-lg">
+    This site does not process payments. It only creates the order.
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-6">
+    <div class="space-y-4">
+      <div
+        class="card space-y-3"
+        [ngClass]="{ 'border-red-400 ring-1 ring-red-100': isInvalid('deliveryMethod') }"
+      >
+        <h3 class="text-lg font-semibold text-[var(--text-strong)]">Your details</h3>
+        <div class="flex flex-col gap-2">
+          <label class="text-sm text-[var(--text)]">Full name *</label>
+          <input
+            type="text"
+            [(ngModel)]="name"
+            placeholder="e.g. John Smith"
+            class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] bg-[var(--surface)]"
+            [ngClass]="{ 'border-red-400 ring-2 ring-red-100': isInvalid('name'), 'border-[var(--border-strong)]': !isInvalid('name') }"
+          />
+        </div>
+        <div class="flex flex-col gap-2">
+          <label class="text-sm text-[var(--text)]">Phone *</label>
+          <input
+            type="tel"
+            [(ngModel)]="phone"
+            placeholder="e.g. 555-123-4567"
+            class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] bg-[var(--surface)]"
+            [ngClass]="{ 'border-red-400 ring-2 ring-red-100': isInvalid('phone'), 'border-[var(--border-strong)]': !isInvalid('phone') }"
+          />
+        </div>
+      </div>
+
+      <div
+        class="card space-y-3"
+        [ngClass]="{ 'border-red-400 ring-1 ring-red-100': isInvalid('paymentMethod') }"
+      >
+        <h3 class="text-lg font-semibold text-[var(--text-strong)]">Delivery method *</h3>
+        <label
+          class="flex items-center gap-3 border border-[var(--border)] rounded-lg px-3 py-3 cursor-pointer hover:border-[var(--primary)]"
+        >
+          <input
+            type="radio"
+            name="delivery"
+            value="pickup"
+            [(ngModel)]="deliveryMethod"
+            class="accent-[var(--primary)]"
+          />
+          <span class="w-5 h-5 rounded-full border border-[var(--border-strong)] flex items-center justify-center text-[var(--accent)]">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 9.75 12 4.5l9 5.25M5.25 10.5v7.125a.375.375 0 0 0 .375.375H9v-4.5h6v4.5h3.375a.375.375 0 0 0 .375-.375V10.5M4.5 19.5h15" />
+            </svg>
+          </span>
+          <span class="text-[var(--text-strong)]">Store pickup</span>
+        </label>
+        <label
+          class="flex items-center gap-3 border border-[var(--border)] rounded-lg px-3 py-3 cursor-pointer hover:border-[var(--primary)]"
+        >
+          <input
+            type="radio"
+            name="delivery"
+            value="delivery"
+            [(ngModel)]="deliveryMethod"
+            class="accent-[var(--primary)]"
+          />
+          <span class="w-5 h-5 rounded-full border border-[var(--border-strong)] flex items-center justify-center text-[var(--accent)]">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 21c-4.5-4.5-6-7.5-6-10a6 6 0 1 1 12 0c0 2.5-1.5 5.5-6 10Zm0-9.25a1.75 1.75 0 1 0 0-3.5 1.75 1.75 0 0 0 0 3.5Z" />
+            </svg>
+          </span>
+          <span class="text-[var(--text-strong)]">Home delivery</span>
+        </label>
+
+        <div *ngIf="deliveryMethod === 'delivery'" class="mt-3 space-y-2">
+          <div class="flex flex-col gap-1">
+            <label class="text-sm text-[var(--text)]">Street *</label>
+            <input
+              type="text"
+              [(ngModel)]="address.street"
+              placeholder="e.g. 123 Main St"
+              class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] bg-[var(--surface)]"
+              [ngClass]="{ 'border-red-400 ring-2 ring-red-100': isInvalid('street'), 'border-[var(--border-strong)]': !isInvalid('street') }"
+            />
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div class="flex flex-col gap-1">
+              <label class="text-sm text-[var(--text)]">Number *</label>
+              <input
+                type="text"
+                [(ngModel)]="address.number"
+                placeholder="1234"
+                class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] bg-[var(--surface)]"
+                [ngClass]="{ 'border-red-400 ring-2 ring-red-100': isInvalid('number'), 'border-[var(--border-strong)]': !isInvalid('number') }"
+              />
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="text-sm text-[var(--text)]">Neighborhood *</label>
+              <input
+                type="text"
+                [(ngModel)]="address.neighborhood"
+                placeholder="Downtown"
+                class="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] bg-[var(--surface)]"
+                [ngClass]="{ 'border-red-400 ring-2 ring-red-100': isInvalid('neighborhood'), 'border-[var(--border-strong)]': !isInvalid('neighborhood') }"
+              />
+            </div>
+            <div class="flex flex-col gap-1">
+              <label class="text-sm text-[var(--text)]">Apartment / Suite</label>
+              <input
+                type="text"
+                [(ngModel)]="address.apartment"
+                placeholder="2B"
+                class="w-full border border-[var(--border-strong)] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] bg-[var(--surface)]"
+              />
+            </div>
+          </div>
+          <div class="flex flex-col gap-1">
+            <label class="text-sm text-[var(--text)]">Reference</label>
+            <input
+              type="text"
+              [(ngModel)]="address.floor"
+              placeholder="Door color, extra instructions"
+              class="w-full border border-[var(--border-strong)] rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-[var(--secondary)] bg-[var(--surface)]"
+            />
+          </div>
+        </div>
+
+        <div *ngIf="deliveryMethod === 'pickup'" class="mt-3 text-sm text-[var(--text)]">
+          Pickup at: <strong class="text-[var(--text-strong)]">{{ store.config.name }}</strong>
+          <div class="text-[var(--text-muted)]">
+            {{ store.config.address || 'Store address' }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="space-y-4">
+      <div class="card space-y-3">
+        <h3 class="text-lg font-semibold text-[var(--text-strong)]">Payment method *</h3>
+        <label
+          class="flex items-center gap-3 border border-[var(--border)] rounded-lg px-3 py-3 cursor-pointer hover:border-[var(--primary)]"
+        >
+          <input
+            type="radio"
+            name="payment"
+            value="transfer"
+            [(ngModel)]="paymentMethod"
+            class="accent-[var(--primary)]"
+          />
+          <span class="text-[var(--text-strong)]">Bank transfer</span>
+        </label>
+        <label
+          class="flex items-center gap-3 border border-[var(--border)] rounded-lg px-3 py-3 cursor-pointer hover:border-[var(--primary)]"
+        >
+          <input
+            type="radio"
+            name="payment"
+            value="card"
+            [(ngModel)]="paymentMethod"
+            class="accent-[var(--primary)]"
+          />
+          <span class="text-[var(--text-strong)]">Card (in store)</span>
+        </label>
+        <label
+          class="flex items-center gap-3 border border-[var(--border)] rounded-lg px-3 py-3 cursor-pointer hover:border-[var(--primary)]"
+        >
+          <input
+            type="radio"
+            name="payment"
+            value="cash"
+            [(ngModel)]="paymentMethod"
+            class="accent-[var(--primary)]"
+          />
+          <span class="text-[var(--text-strong)]">Cash</span>
+        </label>
+      </div>
+
+      <div class="card space-y-3">
+        <h3 class="text-lg font-semibold text-[var(--text-strong)]">Order summary</h3>
+        <div *ngIf="cart.cartItems().length === 0" class="text-sm text-[var(--text)]">
+          Your cart is empty.
+        </div>
+        <div *ngIf="cart.cartItems().length > 0" class="space-y-2">
+          <div
+            *ngFor="let item of cart.cartItems()"
+            class="flex justify-between text-sm text-[var(--text-strong)] border-b border-[var(--border)] pb-2"
+          >
+            <span>{{ item.type === 'product' ? item.product.name : item.promo.name }} x{{ item.quantity }}</span>
+            <span class="font-semibold">
+              {{ store.currencySymbol }} {{ cart.getLineTotalForItem(item) }}
+            </span>
+          </div>
+          <div class="flex justify-between pt-2 text-lg font-bold text-[var(--primary)]">
+            <span>Total</span>
+            <span>{{ cart.totalAmount() | currency:store.config.currency:'symbol' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button
+    class="w-full text-base py-3 flex items-center justify-center gap-2 rounded-lg text-white font-semibold shadow-lg transition"
+    [ngClass]="{
+      'bg-gradient-to-r from-green-500 to-green-600 hover:from-green-500 hover:to-green-500': !hasErrors() && !isSubmitting,
+      'bg-gray-300 cursor-not-allowed': hasErrors() || isSubmitting
+    }"
+    [disabled]="cart.cartItems().length === 0 || isSubmitting"
+    (click)="submit()"
+  >
+    <span *ngIf="isSubmitting" class="animate-spin w-4 h-4 border-2 border-white/60 border-t-transparent rounded-full"></span>
+    <span>{{ isSubmitting ? 'Sending...' : 'Send order via WhatsApp' }}</span>
+  </button>
+
+  <div
+    *ngIf="successOrderId"
+    class="mt-4 p-4 rounded-lg bg-[var(--surface-soft-alt)] border border-[var(--border)] text-[var(--text-strong)] space-y-2"
+  >
+    <p class="font-semibold">Order sent</p>
+    <p class="text-sm">You can track your order here:</p>
+    <a
+      class="text-[var(--primary)] font-semibold underline"
+      [routerLink]="['/track', successOrderId]"
+      >View order status ({{ successOrderId }})</a
+    >
+  </div>
+</section>
+
+<app-toast></app-toast>

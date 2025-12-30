@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat:*)",
+      "Bash(wc:*)",
+      "Bash(dotnet user-secrets:*)",
+      "Bash(powershell -Command \"$key = -join \\(\\(48..57\\) + \\(65..90\\) + \\(97..122\\) | Get-Random -Count 64 | ForEach-Object {[char]$_\\); Write-Output $key\")",
+      "Bash(dotnet restore:*)",
+      "Bash(dotnet test:*)",
+      "Bash(dotnet build:*)"
+    ]
+  }
+}

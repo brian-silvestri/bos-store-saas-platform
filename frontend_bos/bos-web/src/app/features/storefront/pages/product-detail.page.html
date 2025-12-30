@@ -1,0 +1,82 @@
+<section class="max-w-4xl mx-auto space-y-4">
+  <a *ngIf="returnPromoId; else backToStore" [routerLink]="['/promo', returnPromoId]" class="btn-outline inline-flex items-center">
+    Back to promotion
+  </a>
+  <ng-template #backToStore>
+    <a routerLink="/store" class="btn-outline inline-flex items-center">
+      Back to store
+    </a>
+  </ng-template>
+
+  <div *ngIf="product() as product; else missing" class="grid md:grid-cols-2 gap-6">
+    <div class="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-4">
+      <div class="relative h-64 rounded-lg overflow-hidden bg-[var(--surface-soft)]">
+        <img
+          *ngIf="product.imageUrl"
+          [src]="product.imageUrl"
+          [alt]="product.name"
+          class="w-full h-full object-cover"
+        />
+        <div class="absolute top-2 right-2 flex flex-col gap-1">
+          <span
+            *ngFor="let badge of badges()"
+            class="bg-[var(--secondary)] text-white text-[11px] font-bold px-2 py-1 rounded-full shadow text-center"
+          >
+            {{ badge }}
+          </span>
+        </div>
+      </div>
+      <h1 class="text-2xl font-semibold text-[var(--text-strong)] mt-4">{{ product.name }}</h1>
+      <p class="text-sm text-[var(--text)] mt-2">{{ product.description || 'No description.' }}</p>
+
+      <div *ngIf="product.price" class="mt-4">
+        <p class="text-xl font-semibold text-[var(--accent)]">
+          {{ store.currencySymbol }} {{ effectivePrice() ?? product.price }}
+        </p>
+        <p *ngIf="discountPercent() > 0" class="text-xs text-[var(--text-muted)] line-through">
+          {{ store.currencySymbol }} {{ product.price }}
+        </p>
+      </div>
+    </div>
+
+    <div class="space-y-4">
+      <div class="card space-y-3">
+        <h3 class="text-lg font-semibold text-[var(--text-strong)]">Add to cart</h3>
+        <div class="flex items-center gap-2">
+          <button
+            class="w-8 h-8 rounded border border-[var(--border-strong)] text-[var(--text)] bg-[var(--surface)] shadow-sm hover:bg-[var(--surface-muted)]"
+            (click)="changeQty(-1)"
+          >
+            -
+          </button>
+          <span class="w-10 text-center font-semibold">{{ quantity }}</span>
+          <button
+            class="w-8 h-8 rounded border border-[var(--border-strong)] text-[var(--text)] bg-[var(--surface)] shadow-sm hover:bg-[var(--surface-muted)]"
+            (click)="changeQty(1)"
+          >
+            +
+          </button>
+        </div>
+        <button class="btn-primary w-full" (click)="add()">Add</button>
+      </div>
+
+      <div *ngIf="promotionsForProduct().length" class="card space-y-2">
+        <h3 class="text-lg font-semibold text-[var(--text-strong)]">Available promotions</h3>
+        <div class="space-y-2">
+          <a
+            *ngFor="let promo of promotionsForProduct()"
+            [routerLink]="['/promo', promo.id]"
+            class="block border border-[var(--border)] rounded-lg px-3 py-2 text-sm text-[var(--text)] hover:border-[var(--primary)]"
+          >
+            <div class="font-semibold text-[var(--text-strong)]">{{ promo.name }}</div>
+            <div class="text-xs text-[var(--text-muted)]">{{ promo.description || 'View details' }}</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #missing>
+    <div class="card text-center text-[var(--text-muted)]">Product not found.</div>
+  </ng-template>
+</section>

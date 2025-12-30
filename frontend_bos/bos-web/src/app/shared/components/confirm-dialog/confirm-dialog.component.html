@@ -1,0 +1,21 @@
+<ng-container *ngIf="state() as s">
+  <div class="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-[1000]">
+    <div class="bg-[var(--surface)] rounded-xl shadow-2xl w-80 p-5 space-y-3 border border-[var(--border)]">
+      <p class="text-sm text-[var(--text-strong)]">{{ s.message }}</p>
+      <div class="flex justify-end gap-2 pt-2">
+        <button
+          class="px-4 py-2 rounded-lg border border-[var(--border-strong)] text-sm text-[var(--text)] hover:bg-[var(--surface-muted)] transition"
+          (click)="cancel()"
+        >
+          Cancel
+        </button>
+        <button
+          class="px-4 py-2 rounded-lg bg-[var(--primary)] text-white text-sm font-semibold shadow hover:opacity-90 transition"
+          (click)="accept()"
+        >
+          Confirm
+        </button>
+      </div>
+    </div>
+  </div>
+</ng-container>

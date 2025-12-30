@@ -1,0 +1,111 @@
+.login-shell {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 16px;
+  background: linear-gradient(135deg, #f8f3ee, #f2e3d4);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.12);
+  text-align: center;
+}
+
+.login-header h1 {
+  font-size: 28px;
+  font-weight: 600;
+  margin: 8px 0;
+  color: #111111;
+}
+
+.login-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  font-size: 11px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.login-subtitle {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.login-error {
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 12px;
+  background: #fff4f3;
+  border: 1px solid #f2c2bd;
+  color: #a0312a;
+  font-size: 13px;
+}
+
+.login-form {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+}
+
+.login-form label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.login-form input {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.login-form input:focus {
+  outline: none;
+  border-color: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
+}
+
+.login-form button {
+  margin-top: 8px;
+  border: none;
+  border-radius: 999px;
+  padding: 12px;
+  background: #111111;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.login-form button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: #000000;
+}
+
+.login-form button:disabled {
+  background: rgba(0, 0, 0, 0.35);
+  cursor: not-allowed;
+}
+
+.login-footer {
+  margin-top: 24px;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.login-credentials {
+  margin-top: 4px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.75);
+}

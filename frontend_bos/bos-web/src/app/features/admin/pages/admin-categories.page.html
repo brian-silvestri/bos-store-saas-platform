@@ -1,0 +1,72 @@
+<div class="space-y-4">
+  <div class="flex items-center justify-between">
+    <div>
+      <h1 class="text-2xl font-semibold text-[var(--neutral-text)]">Category management</h1>
+      <p class="text-sm text-[var(--neutral-muted)]">Create and organize store categories</p>
+    </div>
+  </div>
+
+  <form
+    class="bg-[var(--surface)] border border-[var(--neutral-border)] rounded-xl p-4 shadow-sm space-y-3"
+    (ngSubmit)="saveCategory()"
+  >
+    <h3 class="text-lg font-semibold text-[var(--neutral-text)]">
+      {{ editingName ? 'Edit category' : 'New category' }}
+    </h3>
+    <div class="flex flex-col gap-1 text-sm">
+      <label class="text-[var(--neutral-muted)]">Name *</label>
+      <input
+        class="border border-[var(--neutral-border)] rounded-lg px-3 py-2"
+        name="categoryName"
+        [(ngModel)]="formName"
+        required
+      />
+    </div>
+    <div class="flex items-center gap-3">
+      <button class="btn-primary" type="submit">
+        {{ editingName ? 'Save changes' : 'Create category' }}
+      </button>
+      <button
+        class="px-4 py-2 rounded-lg border border-[var(--neutral-border)] text-sm text-[var(--neutral-subtle)]"
+        type="button"
+        (click)="resetForm()"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+
+  <div class="bg-[var(--surface)] border border-[var(--neutral-border)] rounded-xl shadow-sm">
+    <div class="overflow-auto">
+      <table class="min-w-full text-sm text-[var(--neutral-text)]">
+        <thead class="bg-[var(--neutral-surface)] text-xs text-[var(--neutral-muted)] border-b border-[var(--neutral-border)]">
+          <tr>
+            <th class="px-4 py-3 text-left">Category</th>
+            <th class="px-4 py-3 text-left">Products</th>
+            <th class="px-4 py-3 text-left">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let c of categories()"
+            class="border-b border-[var(--neutral-border)] hover:bg-[var(--neutral-surface)]"
+          >
+            <td class="px-4 py-3">{{ c }}</td>
+            <td class="px-4 py-3 text-[var(--neutral-muted)]">{{ productCount(c) }}</td>
+            <td class="px-4 py-3">
+              <div class="flex gap-2">
+                <button class="btn-outline px-3 py-1" (click)="editCategory(c)">Edit</button>
+                <button class="btn-danger px-3 py-1" (click)="deleteCategory(c)">Delete</button>
+              </div>
+            </td>
+          </tr>
+          <tr *ngIf="categories().length === 0">
+            <td colspan="3" class="px-4 py-6 text-center text-[var(--neutral-muted)]">
+              No categories created.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

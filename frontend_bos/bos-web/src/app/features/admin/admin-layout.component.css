@@ -1,0 +1,15 @@
+.nav-link {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 10px;
+  transition: background 0.2s;
+}
+
+.nav-link:hover {
+  background: var(--neutral-surface-alt);
+}
+
+.active-link {
+  background: var(--neutral-border);
+  font-weight: 600;
+}

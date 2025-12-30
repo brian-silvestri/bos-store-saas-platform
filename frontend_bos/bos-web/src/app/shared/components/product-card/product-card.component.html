@@ -1,0 +1,56 @@
+<div class="card space-y-3">
+  <div class="relative h-40 overflow-hidden rounded-lg bg-[var(--surface-soft)]">
+    <img
+      *ngIf="product.imageUrl"
+      [src]="product.imageUrl"
+      [alt]="product.name"
+      class="w-full h-full object-cover"
+    />
+    <div class="absolute top-2 right-2 flex flex-col gap-1">
+      <span
+        *ngFor="let badge of badges()"
+        class="bg-[var(--secondary)] text-white text-[11px] font-bold px-2 py-1 rounded-full shadow text-center"
+      >
+        {{ badge }}
+      </span>
+    </div>
+  </div>
+
+  <h3 class="font-semibold text-base text-[var(--text-strong)]">{{ product.name }}</h3>
+
+  <div *ngIf="product.price" class="space-y-1">
+    <p class="text-base font-semibold text-[var(--accent)]">
+      {{ store.currencySymbol }} {{ effectivePrice() ?? product.price }}
+    </p>
+    <p *ngIf="discountPercent() > 0" class="text-xs text-[var(--text-muted)] line-through">
+      {{ store.currencySymbol }} {{ product.price }}
+    </p>
+  </div>
+
+  <p *ngIf="!product.price" class="text-xs text-gray-500 italic">
+    Price on request
+  </p>
+
+  <div class="flex items-center gap-2">
+    <button
+      class="w-8 h-8 rounded border border-[var(--border-strong)] text-[var(--text)] bg-[var(--surface)] shadow-sm hover:bg-[var(--surface-muted)]"
+      (click)="changeQty(-1)"
+    >
+      -
+    </button>
+    <span class="w-10 text-center font-semibold">{{ quantity }}</span>
+    <button
+      class="w-8 h-8 rounded border border-[var(--border-strong)] text-[var(--text)] bg-[var(--surface)] shadow-sm hover:bg-[var(--surface-muted)]"
+      (click)="changeQty(1)"
+    >
+      +
+    </button>
+  </div>
+
+  <div class="mt-2 flex items-center gap-2">
+    <button class="btn-primary flex-1 flex items-center justify-center gap-2" (click)="add()">
+      <span>Add</span>
+    </button>
+    <a [routerLink]="['/product', product.id]" class="btn-outline flex-1 text-center">View details</a>
+  </div>
+</div>

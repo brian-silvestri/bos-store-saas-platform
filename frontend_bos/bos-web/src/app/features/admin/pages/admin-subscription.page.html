@@ -1,0 +1,134 @@
+<div>
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold text-[var(--neutral-text)] mb-2">Mi Suscripción</h1>
+    <p class="text-[var(--neutral-muted)]">Administra tu plan y activa códigos de licencia</p>
+  </div>
+
+  @if (loading()) {
+    <div class="p-12 text-center text-[var(--neutral-muted)]">Cargando...</div>
+  } @else if (subscription()) {
+    <!-- Status Banner -->
+    <div class="status-banner" [class]="'status-' + getStatusColor()">
+      <div class="flex items-center gap-4">
+        <div class="status-icon">
+          @if (getStatusColor() === 'active') {
+            <span class="text-2xl">✓</span>
+          } @else if (getStatusColor() === 'warning') {
+            <span class="text-2xl">⚠</span>
+          } @else {
+            <span class="text-2xl">✕</span>
+          }
+        </div>
+        <div class="flex-1">
+          <div class="text-lg font-bold mb-1">
+            {{ getStatusText() }}
+          </div>
+          <div class="text-sm opacity-90">
+            @if (getDaysRemaining() > 0) {
+              Tu suscripción vence en {{ getDaysRemaining() }} días
+            } @else {
+              Tu suscripción ha expirado
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Subscription Details Card -->
+    <div class="bg-[var(--surface)] rounded-xl shadow-sm overflow-hidden mb-8">
+      <div class="px-6 py-4 border-b border-[var(--neutral-border)]">
+        <h2 class="text-xl font-semibold text-[var(--neutral-text)]">Detalles del Plan</h2>
+      </div>
+
+      <div class="p-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-sm font-medium text-[var(--neutral-muted)] mb-2">Plan Actual</label>
+            <div class="text-2xl font-bold text-[var(--neutral-text)]">{{ subscription()!.planName }}</div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-[var(--neutral-muted)] mb-2">Estado</label>
+            <div class="flex items-center gap-2">
+              <span class="status-badge" [class]="'status-' + getStatusColor()">
+                {{ subscription()!.status }}
+              </span>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-[var(--neutral-muted)] mb-2">Fecha de Inicio</label>
+            <div class="text-lg text-[var(--neutral-text)]">{{ formatDate(subscription()!.startDate) }}</div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-[var(--neutral-muted)] mb-2">Fecha de Vencimiento</label>
+            <div class="text-lg text-[var(--neutral-text)]">{{ formatDate(subscription()!.endDate) }}</div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-[var(--neutral-muted)] mb-2">Días Restantes</label>
+            <div class="text-3xl font-bold" [class]="getDaysRemaining() <= 7 ? 'text-red-600' : 'text-green-600'">
+              {{ getDaysRemaining() }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Activate License Code Section -->
+    <div class="bg-[var(--surface)] rounded-xl shadow-sm overflow-hidden">
+      <div class="px-6 py-4 border-b border-[var(--neutral-border)]">
+        <h2 class="text-xl font-semibold text-[var(--neutral-text)]">Activar Código de Licencia</h2>
+      </div>
+
+      <div class="p-6">
+        <p class="text-[var(--neutral-muted)] mb-4">
+          Ingresa un código de licencia para extender o actualizar tu suscripción.
+        </p>
+
+        <form (ngSubmit)="activateLicense()" class="flex gap-3">
+          <input
+            type="text"
+            [(ngModel)]="licenseCode"
+            name="licenseCode"
+            placeholder="BOS-XXX-XXXX-XXXX"
+            [disabled]="activating()"
+            class="flex-1 px-4 py-3 border border-[var(--neutral-border)] rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent font-mono text-sm"
+            pattern="BOS-[A-Z]+-[A-Z0-9]{4}-[A-Z0-9]{4}"
+          />
+          <button
+            type="submit"
+            [disabled]="activating() || !licenseCode.trim()"
+            class="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            @if (activating()) {
+              Activando...
+            } @else {
+              Activar
+            }
+          </button>
+        </form>
+
+        <div class="mt-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+          <div class="flex gap-2">
+            <span class="text-blue-600">ℹ</span>
+            <div class="text-sm text-blue-800">
+              <div class="font-medium mb-1">Formato del código:</div>
+              <ul class="list-disc list-inside space-y-1">
+                <li>Debe comenzar con "BOS-"</li>
+                <li>Seguido del tipo de plan (ej: PRO, TRIAL)</li>
+                <li>Dos bloques de 4 caracteres separados por guiones</li>
+                <li>Ejemplo: BOS-PRO-A1B2-C3D4</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  } @else {
+    <div class="p-12 text-center">
+      <p class="text-[var(--neutral-muted)] text-lg">No se encontró información de suscripción</p>
+    </div>
+  }
+</div>

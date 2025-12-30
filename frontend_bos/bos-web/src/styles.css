@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ======================
+   BOS GLOBAL THEME
+====================== */
+:root {
+  --primary: #b24a1b;
+  --secondary: #f0b665;
+  --primary-border: #8c3615;
+  --bg: #f7f2eb;
+  --surface: #ffffff;
+  --surface-muted: #fdf3e5;
+  --surface-soft: #f5e8d9;
+  --surface-soft-alt: #f4e5d7;
+  --border: #e7d6c6;
+  --border-strong: #e0cdb3;
+  --text: #5b341f;
+  --text-strong: #3c291c;
+  --text-muted: #7a5a49;
+  --text-subtle: #b49a84;
+  --accent: #a24a1d;
+  --badge: #e85d2a;
+  --neutral-surface: #f9fafb;
+  --neutral-surface-alt: #f4f4f5;
+  --neutral-border: #e5e7eb;
+  --neutral-border-strong: #d1d5db;
+  --neutral-text: #1f2937;
+  --neutral-muted: #6b7280;
+  --neutral-subtle: #4b5563;
+}
+
+body {
+  @apply bg-[var(--bg)] text-[var(--text)];
+}
+
+.container {
+  @apply max-w-6xl mx-auto px-4;
+}
+
+.btn-primary {
+  @apply bg-gradient-to-r from-blue-600 to-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:from-blue-700 hover:to-blue-800 hover:-translate-y-0.5;
+}
+
+.btn-outline {
+  @apply border-2 border-gray-300 text-gray-700 px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 hover:bg-blue-50 hover:border-blue-400 hover:text-blue-700;
+}
+
+.btn-danger {
+  @apply border-2 border-red-400 text-red-600 px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 hover:bg-red-50 hover:border-red-500 hover:text-red-700 hover:shadow-md;
+}
+
+.card {
+  @apply bg-[var(--surface)] border border-[var(--border)] rounded-xl p-4 shadow-md shadow-[rgba(0,0,0,0.04)];
+}
+
+.text-primary {
+  color: var(--primary);
+}

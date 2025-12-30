@@ -1,0 +1,50 @@
+<div class="login-shell">
+  <div class="login-card">
+    <div class="login-header">
+      <p class="login-kicker">BosStore Admin</p>
+      <h1>Inicia sesión</h1>
+      <p class="login-subtitle">Accede al panel de tu tienda.</p>
+    </div>
+
+    @if (error()) {
+      <div class="login-error">
+        <p>{{ error() }}</p>
+      </div>
+    }
+
+    <form (ngSubmit)="login()" class="login-form">
+      <label for="email">Email</label>
+      <input
+        id="email"
+        type="email"
+        [(ngModel)]="email"
+        name="email"
+        required
+        placeholder="admin@mitienda.com"
+      />
+
+      <label for="password">Contraseña</label>
+      <input
+        id="password"
+        type="password"
+        [(ngModel)]="password"
+        name="password"
+        required
+        placeholder="********"
+      />
+
+      <button type="submit" [disabled]="loading()">
+        @if (loading()) {
+          <span>Iniciando sesión...</span>
+        } @else {
+          <span>Iniciar sesión</span>
+        }
+      </button>
+    </form>
+
+    <div class="login-footer">
+      <p>Credenciales de prueba:</p>
+      <p class="login-credentials">admin@mitienda.com / Admin123!</p>
+    </div>
+  </div>
+</div>

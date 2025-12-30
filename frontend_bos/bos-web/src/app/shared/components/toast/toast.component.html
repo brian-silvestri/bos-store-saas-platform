@@ -1,0 +1,13 @@
+<ng-container *ngIf="toast() as t">
+  <div
+    class="fixed bottom-4 right-4 px-4 py-3 rounded-lg shadow-lg flex items-center gap-2 text-white"
+    [ngClass]="t.type === 'success' ? 'bg-green-600' : 'bg-red-600'"
+  >
+    <div class="flex items-center gap-2">
+      <span>{{ t.message }}</span>
+      <span *ngIf="t.count > 1" class="text-xs bg-white/20 px-2 py-0.5 rounded-full">
+        x{{ t.count }}
+      </span>
+    </div>
+  </div>
+</ng-container>

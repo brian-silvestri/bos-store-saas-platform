@@ -1,0 +1,58 @@
+import { Product } from '../models/product.model'
+
+export const PRODUCTS_MOCK: Product[] = [
+  {
+    id: '1',
+    name: 'Beef Empanadas',
+    price: 150,
+    category: 'Empanadas',
+    isPromotion: true,
+    description: 'Homemade empanadas with beef, egg, and spices.',
+    imageUrl: 'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=900&q=80',
+  },
+  {
+    id: '2',
+    name: 'Chicken Empanadas',
+    price: 140,
+    category: 'Empanadas',
+    isPromotion: false,
+    description: 'Juicy chicken empanadas with fresh vegetables.',
+    imageUrl: 'https://images.unsplash.com/photo-1528715471579-d1bcf0ba5e83?auto=format&fit=crop&w=900&q=80',
+  },
+  {
+    id: '3',
+    name: 'Mozzarella Pizza',
+    price: 2500,
+    category: 'Pizzas',
+    isPromotion: true,
+    description: 'Classic pizza with mozzarella and tomato sauce.',
+    imageUrl: 'https://images.unsplash.com/photo-1548365328-9f547107e9ec?auto=format&fit=crop&w=900&q=80',
+  },
+  {
+    id: '4',
+    name: 'Soda 1.5L',
+    price: 900,
+    category: 'Drinks',
+    isPromotion: false,
+    description: '1.5L soda, ideal for sharing.',
+    imageUrl: 'https://images.unsplash.com/photo-1469536526925-9b5547cd5d68?auto=format&fit=crop&w=900&q=80',
+  },
+  {
+    id: '5',
+    name: 'Caprese Empanadas',
+    price: 170,
+    category: 'Empanadas',
+    isPromotion: false,
+    description: 'Empanadas with tomato, basil, and cheese.',
+    imageUrl: 'https://images.unsplash.com/photo-1478144592103-25e218a04891?auto=format&fit=crop&w=900&q=80',
+  },
+  {
+    id: '6',
+    name: 'Faina Flatbread',
+    price: 800,
+    category: 'Pizzas',
+    isPromotion: false,
+    description: 'Crispy faina, ideal as a side.',
+    imageUrl: 'https://images.unsplash.com/photo-1528137871618-79d2761e3fd5?auto=format&fit=crop&w=900&q=80',
+  },
+]

@@ -1,0 +1,216 @@
+<header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+  <div class="container mx-auto px-6">
+    <nav class="flex items-center justify-between py-4">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center">
+          <span class="text-white font-bold">{{ storeName().charAt(0) }}</span>
+        </div>
+        <span class="text-xl font-semibold">{{ storeName() }}</span>
+      </div>
+      <button (click)="goToStore()" class="px-6 py-2.5 bg-orange-500 text-white text-sm font-medium rounded-lg hover:bg-orange-600 transition shadow-sm">
+        Ver tienda
+      </button>
+    </nav>
+  </div>
+</header>
+
+<main class="bg-white">
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden bg-gradient-to-b from-gray-50 to-white">
+    <div class="container mx-auto px-6 pt-24 pb-32 lg:pt-32 lg:pb-40">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-100 text-sm font-medium text-orange-700 mb-8">
+          Bienvenido a nuestra tienda
+        </div>
+
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-gray-900 mb-6 leading-tight">
+          {{ storeName() }}<br/>
+          <span class="text-gray-500">Tu tienda online</span>
+        </h1>
+
+        <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
+          Descubrí nuestros productos, hacé tu pedido online y recibilo en tu domicilio.
+          Todo desde tu celular, fácil y rápido.
+        </p>
+
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4">
+          <button (click)="goToStore()" class="w-full sm:w-auto px-8 py-4 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 transition shadow-lg text-lg">
+            Ver productos
+          </button>
+        </div>
+
+        <div class="text-sm text-gray-500 mb-16">
+          Envíos a todo el país • Pago online • Seguimiento en tiempo real
+        </div>
+
+        <!-- Store Preview -->
+        <div class="relative max-w-5xl mx-auto">
+          <div class="absolute -inset-4 bg-gradient-to-r from-orange-100 via-orange-50 to-orange-100 rounded-3xl blur-2xl opacity-50"></div>
+          <div class="relative bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden">
+            <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 flex items-center gap-2">
+              <div class="flex gap-1.5">
+                <div class="w-3 h-3 rounded-full bg-gray-300"></div>
+                <div class="w-3 h-3 rounded-full bg-gray-300"></div>
+                <div class="w-3 h-3 rounded-full bg-gray-300"></div>
+              </div>
+              <div class="flex-1 ml-4">
+                <div class="bg-white rounded px-3 py-1.5 text-xs text-gray-500 max-w-xs">
+                  {{ storeName().toLowerCase().replace(' ', '-') }}.bosstore.com
+                </div>
+              </div>
+            </div>
+            <div class="p-8 bg-gradient-to-br from-orange-50 to-white min-h-[300px] flex items-center justify-center">
+              <div class="text-center">
+                <svg class="w-32 h-32 mx-auto mb-4 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                </svg>
+                <p class="text-gray-600 text-lg">Explor á nuestro catálogo completo</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="py-24 bg-gray-50">
+    <div class="container mx-auto px-6">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            ¿Por qué comprar con nosotros?
+          </h2>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Calidad, servicio y confianza en cada pedido
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="group">
+            <div class="bg-white rounded-xl p-8 border border-gray-100 hover:border-orange-200 hover:shadow-lg transition-all">
+              <div class="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">Calidad garantizada</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                Los mejores productos seleccionados especialmente para vos
+              </p>
+            </div>
+          </div>
+
+          <div class="group">
+            <div class="bg-white rounded-xl p-8 border border-gray-100 hover:border-orange-200 hover:shadow-lg transition-all">
+              <div class="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">Entrega rápida</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                Recibí tu pedido en el menor tiempo posible
+              </p>
+            </div>
+          </div>
+
+          <div class="group">
+            <div class="bg-white rounded-xl p-8 border border-gray-100 hover:border-orange-200 hover:shadow-lg transition-all">
+              <div class="w-12 h-12 bg-orange-500 rounded-lg flex items-center justify-center mb-4">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
+                </svg>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-2">Atención personalizada</h3>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                Estamos para ayudarte en lo que necesites
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="py-24 bg-white">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Comprar es muy fácil
+          </h2>
+          <p class="text-lg text-gray-600">
+            En solo 3 pasos tu pedido está en camino
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="text-center">
+            <div class="w-16 h-16 bg-orange-500 text-white rounded-2xl flex items-center justify-center text-2xl font-bold mb-6 mx-auto">
+              1
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Elegí tus productos</h3>
+            <p class="text-gray-600">
+              Navegá el catálogo y agregá lo que necesitás al carrito
+            </p>
+          </div>
+
+          <div class="text-center">
+            <div class="w-16 h-16 bg-orange-500 text-white rounded-2xl flex items-center justify-center text-2xl font-bold mb-6 mx-auto">
+              2
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Completá tus datos</h3>
+            <p class="text-gray-600">
+              Dirección de envío y método de pago preferido
+            </p>
+          </div>
+
+          <div class="text-center">
+            <div class="w-16 h-16 bg-orange-500 text-white rounded-2xl flex items-center justify-center text-2xl font-bold mb-6 mx-auto">
+              3
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-3">Recibí tu pedido</h3>
+            <p class="text-gray-600">
+              Seguí el estado en tiempo real hasta que llegue
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-24 bg-orange-500">
+    <div class="container mx-auto px-6">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">
+          Empezá a comprar ahora
+        </h2>
+        <p class="text-xl text-orange-100 mb-10">
+          Explorá nuestro catálogo completo y hacé tu pedido
+        </p>
+        <button (click)="goToStore()" class="px-10 py-4 bg-white text-orange-500 font-semibold rounded-lg hover:bg-gray-100 transition shadow-lg text-lg">
+          Ver productos
+        </button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="border-t border-gray-100 bg-white">
+  <div class="container mx-auto px-6 py-12">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 bg-orange-500 rounded flex items-center justify-center">
+          <span class="text-white font-bold text-xs">{{ storeName().charAt(0) }}</span>
+        </div>
+        <span class="text-lg font-semibold">{{ storeName() }}</span>
+      </div>
+      <div class="text-sm text-gray-500">
+        © 2025 {{ storeName() }}. Todos los derechos reservados.
+      </div>
+    </div>
+  </div>
+</footer>
