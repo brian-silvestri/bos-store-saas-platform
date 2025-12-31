@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: bosstore-postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-bosstore}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend_bos/database/scripts:/docker-entrypoint-initdb.d
+    networks:
+      - bosstore-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Backend API (.NET 8)
+  backend:
+    build:
+      context: ./backend_bos
+      dockerfile: Dockerfile
+    container_name: bosstore-api
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Development}
+      ASPNETCORE_URLS: http://+:5000
+      ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=${POSTGRES_DB:-bosstore};Username=${POSTGRES_USER:-postgres};Password=${POSTGRES_PASSWORD:-postgres}
+      JwtSettings__SecretKey: ${JWT_SECRET_KEY:-YOUR_SUPER_SECRET_KEY_CHANGE_THIS_IN_PRODUCTION_MIN_32_CHARS}
+      JwtSettings__Issuer: ${JWT_ISSUER:-BosStoreAPI}
+      JwtSettings__Audience: ${JWT_AUDIENCE:-BosStoreClient}
+      JwtSettings__ExpiryInMinutes: ${JWT_EXPIRY:-60}
+    ports:
+      - "5000:5000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./backend_bos/uploads:/app/uploads
+    networks:
+      - bosstore-network
+    restart: unless-stopped
+
+  # Frontend (Angular + Nginx)
+  frontend:
+    build:
+      context: ./frontend_bos/bos-web
+      dockerfile: Dockerfile
+    container_name: bosstore-frontend
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+    networks:
+      - bosstore-network
+    restart: unless-stopped
+
+networks:
+  bosstore-network:
+    driver: bridge
+
+volumes:
+  postgres_data:

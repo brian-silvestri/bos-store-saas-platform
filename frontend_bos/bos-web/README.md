@@ -1,59 +1,113 @@
-# BosWeb
+# BOS Store - Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.1.
+Modern Angular frontend for the BOS Store multi-tenant SaaS e-commerce platform.
 
-## Development server
+## Tech Stack
 
-To start a local development server, run:
+- **Framework**: Angular 20.2
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **State Management**: Angular Signals
+- **HTTP Client**: Angular HttpClient
+- **Real-time**: SignalR
+- **Build Tool**: Angular CLI
+
+## Features
+
+- Multi-tenant store management
+- Product catalog with categories
+- Shopping cart and checkout
+- Order management
+- Subscription plans
+- Real-time order updates (SignalR)
+- Responsive design (Tailwind CSS)
+- Role-based access control
+
+## Prerequisites
+
+- Node.js 18+ or 20+
+- npm 9+
+
+## Development Setup
+
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+2. **Start development server:**
+   ```bash
+   npm start
+   ```
+
+   The app will run at `http://localhost:4200/`
+
+3. **Configure backend URL:**
+
+   Update `src/environments/environment.ts` with your backend API URL:
+   ```typescript
+   export const environment = {
+     production: false,
+     apiUrl: 'http://localhost:5000/api'
+   };
+   ```
+
+## Available Scripts
 
 ```bash
-ng serve
+# Development
+npm start              # Start dev server
+npm run build          # Build for production
+npm run watch          # Build with watch mode
+
+# Code Quality
+npm run lint           # Run ESLint
+npm run format         # Format code with Prettier
+
+# Testing
+npm test               # Run unit tests
+npm run test:coverage  # Run tests with coverage
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Project Structure
 
-## Code scaffolding
+```
+src/
+├── app/
+│   ├── components/       # Reusable UI components
+│   ├── pages/            # Page components
+│   ├── services/         # API services
+│   ├── models/           # TypeScript interfaces
+│   ├── guards/           # Route guards
+│   ├── interceptors/     # HTTP interceptors
+│   └── app.routes.ts     # Application routes
+├── assets/               # Static assets
+├── environments/         # Environment configs
+└── styles.css            # Global styles
+```
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Building for Production
 
 ```bash
-ng generate component component-name
+npm run build
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Build artifacts will be stored in `dist/bos-web/browser/`.
+
+## Docker Deployment
+
+Build and run with Docker:
 
 ```bash
-ng generate --help
+# Build image
+docker build -t bosstore-frontend .
+
+# Run container
+docker run -p 80:80 bosstore-frontend
 ```
 
-## Building
+Or use docker-compose from the project root.
 
-To build the project run:
+## License
 
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+MIT
