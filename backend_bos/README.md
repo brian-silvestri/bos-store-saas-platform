@@ -2,7 +2,7 @@
 
 Backend REST API para sistema de tiendas online multi-tenant construido con .NET 8, PostgreSQL y Entity Framework Core.
 
-## 🏗️ Arquitectura
+## Arquitectura
 
 El proyecto sigue **Clean Architecture** con las siguientes capas:
 
@@ -11,7 +11,7 @@ El proyecto sigue **Clean Architecture** con las siguientes capas:
 - **BosStore.Infrastructure**: Implementación de repositorios, DbContext y servicios externos
 - **BosStore.API**: API REST con controllers y middleware
 
-## 🔑 Características Principales
+## Características Principales
 
 ### Multi-Tenancy
 - **Arquitectura**: Tenant por registro (shared database, tenant discriminator)
@@ -35,13 +35,13 @@ El proyecto sigue **Clean Architecture** con las siguientes capas:
 - **Order**: Pedidos con tracking
 - **OrderItem**: Items de pedidos
 
-## 📋 Prerrequisitos
+## Prerrequisitos
 
 - [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
 - [PostgreSQL 14+](https://www.postgresql.org/download/)
 - [Visual Studio 2022](https://visualstudio.microsoft.com/) o [VS Code](https://code.visualstudio.com/)
 
-## 🚀 Configuración Inicial
+## Configuración Inicial
 
 ### 1. Clonar e instalar dependencias
 
@@ -100,7 +100,7 @@ La API estará disponible en:
 - HTTPS: `https://localhost:5001`
 - Swagger UI: `https://localhost:5001/swagger`
 
-## 🔐 Sistema Multi-Tenant
+## Sistema Multi-Tenant
 
 ### Crear un Tenant (Tienda)
 
@@ -160,7 +160,7 @@ Authorization: Bearer eyJhbGc...
 
 El middleware automáticamente extrae el `TenantId` del JWT y filtra los datos.
 
-## 📡 Endpoints Principales
+## Endpoints Principales
 
 ### Públicos (Sin Autenticación)
 
@@ -185,7 +185,7 @@ El middleware automáticamente extrae el `TenantId` del JWT y filtra los datos.
 | PUT | /api/orders/{id}/status | Actualizar estado de pedido |
 | PUT | /api/storeconfig | Actualizar configuración |
 
-## 🎨 Ejemplo de Uso desde Frontend
+## Ejemplo de Uso desde Frontend
 
 ### 1. Obtener configuración de tienda (pública)
 
@@ -236,7 +236,7 @@ fetch('https://api.bosstore.com/api/orders/ORD-123/status', {
 });
 ```
 
-## 🔧 Comandos Útiles
+## Comandos Útiles
 
 ### Crear nueva migración
 
@@ -264,7 +264,7 @@ dotnet ef database drop --startup-project ../BosStore.API
 dotnet ef database update --startup-project ../BosStore.API
 ```
 
-## 🏭 Despliegue en Producción
+## Despliegue en Producción
 
 ### Variables de Entorno
 
@@ -311,17 +311,13 @@ COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "BosStore.API.dll"]
 ```
 
-## 📚 Recursos Adicionales
+## Recursos Adicionales
 
 - [Documentación .NET 8](https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-8)
 - [Entity Framework Core](https://learn.microsoft.com/en-us/ef/core/)
 - [JWT Authentication](https://jwt.io/)
 - [Multi-Tenancy Patterns](https://learn.microsoft.com/en-us/azure/architecture/guide/multitenant/overview)
 
-## 🤝 Contribuciones
+## License
 
-Este es un proyecto privado. Para cambios, contactar al equipo de desarrollo.
-
-## 📄 Licencia
-
-Propietario: BosStore © 2025
+MIT License - See [LICENSE](../LICENSE) file for details.
