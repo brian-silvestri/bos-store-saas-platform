@@ -250,11 +250,11 @@ This is a portfolio project. Feedback and suggestions are welcome!
 
 ## License
 
-This project is for portfolio and demonstration purposes.
+MIT License - See [LICENSE](LICENSE) file for details.
 
 ## Contact
 
-Brian - [GitHub](https://github.com/yourusername)
+Brian Silvestri - [GitHub](https://github.com/brian-silvestri)
 
 ---
 
